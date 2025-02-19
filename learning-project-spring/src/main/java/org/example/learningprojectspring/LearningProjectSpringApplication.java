@@ -10,10 +10,8 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 public class LearningProjectSpringApplication {
 
     public static void main(String[] args) {
-        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(ProjectConfiguration.class);
+        SpringApplication.run(LearningProjectSpringApplication.class, args);
 
-        Movie movie1 = context.getBean("movie", Movie.class);
-        System.out.println(movie1.getMovieGenre());
     }
 
 }
