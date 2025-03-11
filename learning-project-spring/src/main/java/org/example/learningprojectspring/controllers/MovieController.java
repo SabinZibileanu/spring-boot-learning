@@ -4,6 +4,7 @@ import org.example.learningprojectspring.moviestore.Movie;
 import org.example.learningprojectspring.services.MovieReaderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -19,4 +20,8 @@ public class MovieController {
         return movieReaderService.readMovieData(FILE_MOVIES_DATA);
     }
 
+    @GetMapping("/movies/{id}")
+    public Movie getMovieByID(@PathVariable int id){
+        return movieReaderService.readMovieData(FILE_MOVIES_DATA).get(id);
+    }
 }
