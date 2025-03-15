@@ -13,6 +13,7 @@ public class MovieReaderImpl implements MovieReaderService {
     private final MovieRepository movieRepository;
     private final CSVMovieProcessor csvMovieProcessor;
     private final MovieValidatorService movieValidatorService;
+    private static final String FILE_NAME = "utils/IMDB-Movie-Data.csv";
 
 
     public MovieReaderImpl(MovieRepository movieRepository, CSVMovieProcessor csvMovieProcessor, MovieValidatorService movieValidatorService) {
@@ -22,8 +23,12 @@ public class MovieReaderImpl implements MovieReaderService {
     }
 
     @Override
-    public List<Movie> readMovieData(String fileName) {
-        List<Movie> movies = csvMovieProcessor.readAndParseMovies(fileName);
+    public void readMovieData() {
+        if(movieRepository.count() > 0) {
+            return ;
+        }
+
+        List<Movie> movies = csvMovieProcessor.readAndParseMovies(FILE_NAME);
 
         List<Movie> validMovies = new ArrayList<>();
 
@@ -37,6 +42,7 @@ public class MovieReaderImpl implements MovieReaderService {
             }
 
         }
-        return movieRepository.saveAll(validMovies);
+        movieRepository.saveAll(validMovies);
+
     }
 }

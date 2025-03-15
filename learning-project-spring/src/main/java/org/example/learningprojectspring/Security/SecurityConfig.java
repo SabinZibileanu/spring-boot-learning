@@ -49,11 +49,17 @@ public class SecurityConfig {
                     httpForm.defaultSuccessUrl("/index", true);
 
                 })
-
-
                 .authorizeHttpRequests(registry ->{
                     registry.requestMatchers("/req/register","/css/**","/js/**").permitAll();
                     registry.anyRequest().authenticated();
+                })
+                .logout(logout ->{
+                    logout.logoutUrl("/logout");
+                    logout.logoutSuccessUrl("/req/login")
+                            .invalidateHttpSession(true)
+                            .deleteCookies("JSESSIONID")
+                            .permitAll();
+
                 })
                 .build();
     }

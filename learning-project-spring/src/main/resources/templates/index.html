@@ -21,19 +21,37 @@
         nav {
             display: flex;
             justify-content: center;
+            align-items: center;
             background-color: #333;
+            padding: 10px 0;
         }
 
-        nav a {
+        nav a, .logout-btn {
             color: white;
             padding: 14px 20px;
             text-decoration: none;
             text-align: center;
+            font-size: 16px;
+            border: none;
+            background: none;
+            cursor: pointer;
+            transition: background 0.3s;
         }
 
-        nav a:hover {
+        nav a:hover, .logout-btn:hover {
             background-color: #ddd;
             color: black;
+        }
+
+        /* Remove default button styles */
+        .logout-btn {
+            font-family: inherit;
+        }
+
+        .logout-form {
+            display: inline;
+            margin: 0;
+            padding: 0;
         }
 
         main {
@@ -60,6 +78,10 @@
     <a href="#about">About</a>
     <a href="#services">Services</a>
     <a href="#contact">Contact</a>
+    <!-- Styled logout button inside the form -->
+    <form th:action="@{/logout}" method="post" class="logout-form">
+        <button type="submit" class="logout-btn">Logout</button>
+    </form>
 </nav>
 <main>
     <h2>About Me</h2>

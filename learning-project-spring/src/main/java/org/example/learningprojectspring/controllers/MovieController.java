@@ -1,27 +1,21 @@
 package org.example.learningprojectspring.controllers;
-
 import org.example.learningprojectspring.moviestore.Movie;
-import org.example.learningprojectspring.services.MovieReaderService;
+import org.example.learningprojectspring.repositories.MovieRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
+
 public class MovieController {
     @Autowired
-    private MovieReaderService movieReaderService;
-    private final static String FILE_MOVIES_DATA = "utils/IMDB-Movie-Data.csv";
+
+    private MovieRepository movieRepository;
 
     @GetMapping("/movies")
-    public List<Movie> getAllMovies(){
-        return movieReaderService.readMovieData(FILE_MOVIES_DATA);
+    public List<Movie> getMovies() {
+        return movieRepository.findAll();
     }
 
-    @GetMapping("/movies/{id}")
-    public Movie getMovieByID(@PathVariable int id){
-        return movieReaderService.readMovieData(FILE_MOVIES_DATA).get(id);
-    }
 }
